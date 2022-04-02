@@ -22,6 +22,7 @@ class BaseError extends Error {
     this.code = code;
     this.statusCode = statusCode;
     this.data = data;
+    this.serviceError = true;
   }
 }
 

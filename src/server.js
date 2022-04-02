@@ -1,5 +1,6 @@
 const express = require('express');
 const { createLogger } = require('bunyan');
+const bodyParser = require('body-parser');
 
 const notFoundMiddleware = require('./middlewares/notFound');
 const errorMiddleware = require('./middlewares/error');
@@ -27,6 +28,7 @@ class Server {
     this.app.locals.logger = this.logger;
     this.logger.info({ event: 'config', config: this.config });
 
+    this.app.use(bodyParser.json());
     if (this.routes && this.routes.length) {
       this.routes.forEach((route) => this.app.use(route));
     }

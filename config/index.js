@@ -4,10 +4,15 @@ const { readFileSync, existsSync } = require('fs');
 const pkg = require('../package.json');
 
 let publicKey;
+let privateKey;
 const publicKeyPath = process.env.AUTH_PUBLICKEY_PATH;
+const privateKeyPath = process.env.AUTH_PRIVATEKEY_PATH;
 
 if (existsSync(process.env.AUTH_PUBLICKEY_PATH)) {
   publicKey = readFileSync(publicKeyPath, 'utf-8');
+}
+if (existsSync(process.env.AUTH_PRIVATEKEY_PATH)) {
+  privateKey = readFileSync(privateKeyPath, 'utf-8');
 }
 
 const config = {
@@ -19,6 +24,8 @@ const config = {
   auth: {
     publicKeyPath,
     publicKey,
+    privateKeyPath,
+    privateKey,
   },
   api: {
     version: pkg.version,

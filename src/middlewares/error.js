@@ -7,10 +7,10 @@
  * @returns {object} next action
  */
 const errorMiddleware = (error, req, res, next) => {
-  res.locals.logger.error({
+  req.app.locals.logger.error({
     event: 'error',
   }, error);
-  res.status(error.statusCode).send(error);
+  res.status(error.statusCode || 500).send(error);
 
   return next();
 };

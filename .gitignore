@@ -71,3 +71,5 @@ test-client/node_modules
 lib-cov
 .nyc_output
 
+auth.key*
+
