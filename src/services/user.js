@@ -21,7 +21,7 @@ class User {
   }
 
   generateToken(data) {
-    return jwt.sign(data, this.config.auth.privateKey, { expiresIn: 24 * 3600 });
+    return jwt.sign(data, this.config.auth.privateKey, { expiresIn: 24 * 3600, algorithm: 'RS256' });
   }
 
   async register(payload) {

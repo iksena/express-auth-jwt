@@ -46,6 +46,7 @@ const config = {
       password: process.env.DB_PASSWORD,
       collections: {
         users: process.env.DB_COLLECTION_USERS,
+        histories: process.env.DB_COLLECTION_HISTORIES,
       },
     },
   },
