@@ -50,20 +50,27 @@ class User {
 
   async login(payload) {
     const { username, password } = payload;
+    const invalidError = new BaseError('Invalid username or password', 'INVALID_PASSWORD', 401);
+
     const user = await this.usersRepository.getUser({ username });
-    const isCorrectPassword = await bcrypt.compare(password, user.password);
+    if (!user) {
+      throw invalidError;
+    }
+
+    const isCorrectPassword = await bcrypt.compare(password, user?.password);
 
     if (isCorrectPassword) {
-      const { password: redactedPassword, ...response } = user;
+      const { password: redactedPassword, _id, ...response } = user;
       this.logger.info('User is logged in successfully', response);
 
       return {
         ...response,
+        userId: _id,
         accessToken: this.generateToken(user),
       };
     }
 
-    throw new BaseError('Invalid username or password', 'INVALID_PASSWORD', 401);
+    throw invalidError;
   }
 }
 
