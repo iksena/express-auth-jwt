@@ -10,12 +10,11 @@ const { User } = require('../../services');
  * @returns {promise} next function execution
  */
 const withUsersDependencies = (req, res, next) => {
-  const { mongo: { db }, config } = req.app.locals;
-  const { logger } = res.locals;
+  const { mongo: { db }, config, logger } = req.app.locals;
 
   const usersRepository = new Users({
     logger,
-    collection: db.collection('users'),
+    collection: db.collection(config.resources.db.collections.users),
   });
 
   res.locals.userService = new User({

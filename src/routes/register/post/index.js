@@ -6,7 +6,7 @@ const withUsersDependencies = require('../../../middlewares/services/users');
 const router = Router();
 
 router.post(
-  '/login',
+  '/register',
   withUsersDependencies,
   handler,
 );

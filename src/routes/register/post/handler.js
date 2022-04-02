@@ -13,7 +13,7 @@ const handler = async (req, res, next) => {
   const { body: payload } = req;
 
   try {
-    const response = await userService.login(payload);
+    const response = await userService.register(payload);
     res.send(response);
     next();
   } catch (error) {
